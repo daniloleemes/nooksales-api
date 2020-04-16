@@ -9,9 +9,54 @@ type ItemType {
   description: String!
 }
 
+type CollectibleMaterialType {
+  count: Int!
+  itemName: String!
+}
+
+type CollectibleActiveTimesType {
+  startTime: Int!
+  endTime: Int!
+}
+
+type CollectibleType {
+  id: ID!
+  gameId: String
+  name: String!
+  image: String
+  obtainedFrom: String!
+  category: String!
+  catchPhrase: String!
+  museumPhrase: String!
+  house: String!
+  model: String!
+  rarity: String!
+  shadow: String!
+  size: String!
+  unlocksAfter: String!
+  weather: String!
+  uses: String!
+  buy: Int!
+  nookMiles: Int!
+  number: Int!
+  sell: Int!
+  variant: Boolean!
+  customize: Boolean!
+  dIY: Boolean!
+  reorder: Boolean!
+  vFX: Boolean!
+  variants: [String!]!
+  activeMonthsNorth: [Int!]!
+  activeMonthsSouth: [Int!]!
+  activeTimes: [CollectibleActiveTimesType!]!
+  materials: [CollectibleMaterialType!]!
+}
+
 type Query {
   items: [ItemType!]!
   hello: String!
+  collectibles: [CollectibleType!]!
+  oneCollectible(id: String!): CollectibleType!
 }
 
 type Mutation {

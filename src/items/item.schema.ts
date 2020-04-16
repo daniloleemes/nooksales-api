@@ -4,4 +4,4 @@ export const ItemSchema = new mongoose.Schema({
     title: String,
     price: Number,
     description: String
-})
+});
