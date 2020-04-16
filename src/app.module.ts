@@ -8,7 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql'
     }),
-    MongooseModule.forRoot('mongodb://localhost:27017/nooksales')
+    MongooseModule.forRoot('mongodb://localhost:27017/nooksales', { useNewUrlParser: true, useUnifiedTopology: true })
   ],
   controllers: [],
   providers: [],
