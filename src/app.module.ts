@@ -9,7 +9,9 @@ import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     GraphQLModule.forRoot({
-      autoSchemaFile: 'schema.gql'
+      autoSchemaFile: 'schema.gql',
+      installSubscriptionHandlers: true,
+      context: ({ req, res }) => ({ req, res })
     }),
     MongooseModule.forRoot('mongodb://localhost:27017/nooksales', { useNewUrlParser: true, useUnifiedTopology: true }),
     CollectiblesModule,
