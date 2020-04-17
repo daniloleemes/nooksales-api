@@ -45,6 +45,16 @@ type CollectibleType {
   materials: [CollectibleMaterialType!]!
 }
 
+type ListingType {
+  id: ID!
+  userId: String!
+  itemId: String!
+  itemsWanted: [String!]!
+  price: Int!
+  sellOnly: Boolean!
+  tradeOnly: Boolean!
+}
+
 type UserType {
   id: ID!
   username: String
@@ -65,8 +75,18 @@ type Query {
 }
 
 type Mutation {
+  createListing(input: CreateListingInput!): ListingType!
   login(username: String!, password: String!): AuthPayload!
   register(input: RegisterInput!): AuthPayload!
+}
+
+input CreateListingInput {
+  userId: String
+  itemId: String!
+  itemsWanted: [String!]!
+  price: Int!
+  sellOnly: Boolean!
+  tradeOnly: Boolean!
 }
 
 input RegisterInput {

@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-export const Listing = new mongoose.Schema({
+export const ListingSchema = new mongoose.Schema({
     userId: String,
     itemId: String,
     sellOnly: Boolean,

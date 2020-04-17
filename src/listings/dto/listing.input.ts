@@ -1,9 +1,8 @@
-import { ObjectType, Field, ID, Int } from "@nestjs/graphql";
+import { InputType, Field, Int } from "@nestjs/graphql";
 
-@ObjectType()
-export class ListingType {
-    @Field(() => ID) readonly id?: string;
-    @Field() readonly userId: string;
+@InputType()
+export class CreateListingInput {
+    @Field({ nullable: true }) readonly userId: string;
     @Field() readonly itemId: string;
     @Field(() => [String]) readonly itemsWanted: string[];
     @Field(() => Int) readonly price: number;
