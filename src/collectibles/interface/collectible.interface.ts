@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-export interface CollectibleActiveTimes extends Document{
+export interface CollectibleActiveTimes extends Document {
     readonly startTime: number;
     readonly endTime: number;
 }
