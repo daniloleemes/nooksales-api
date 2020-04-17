@@ -2,13 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type ItemType {
-  id: ID!
-  title: String!
-  price: Int!
-  description: String!
-}
-
 type CollectibleMaterialType {
   count: Int!
   itemName: String!
@@ -52,21 +45,34 @@ type CollectibleType {
   materials: [CollectibleMaterialType!]!
 }
 
+type UserType {
+  id: ID!
+  username: String
+  discordId: String
+  nintendoFriendCode: String
+  twitter: String
+  password: String
+}
+
+type AuthPayload {
+  user: UserType!
+  accessToken: String!
+}
+
 type Query {
-  items: [ItemType!]!
-  hello: String!
   collectibles: [CollectibleType!]!
   oneCollectible(id: String!): CollectibleType!
 }
 
 type Mutation {
-  createItem(input: ItemInput!): ItemType!
-  updateItem(input: ItemInput!, id: String!): ItemType!
-  deleteItem(id: String!): ItemType!
+  login(username: String!, password: String!): AuthPayload!
+  register(input: RegisterInput!): AuthPayload!
 }
 
-input ItemInput {
-  title: String!
-  price: Int!
-  description: String!
+input RegisterInput {
+  username: String!
+  password: String!
+  discordId: String
+  nintendoFriendCode: String
+  twitter: String
 }
