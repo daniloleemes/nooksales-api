@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { CollectiblesModule } from './collectibles/collectibles.module';
 import { ListingsModule } from './listings/listings.module';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { UsersModule } from './users/users.module';
     MongooseModule.forRoot('mongodb://localhost:27017/nooksales', { useNewUrlParser: true, useUnifiedTopology: true }),
     CollectiblesModule,
     ListingsModule,
-    UsersModule
+    UsersModule,
+    AuthModule
   ],
   controllers: [],
   providers: [],
