@@ -5,6 +5,11 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
@@ -48,6 +53,7 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.1",
+    "husky": "^4.2.5",
     "jest": "^25.1.0",
     "prettier": "^1.19.1",
     "supertest": "^4.0.2",
