@@ -1,5 +1,5 @@
 import { InputType, Field } from "@nestjs/graphql";
-import { MaxLength, Matches, IsEmail, Length } from 'class-validator'
+import { MaxLength, Matches, Length } from 'class-validator'
 import { USERNAME_REGEX } from "src/users/users.const";
 
 @InputType()
