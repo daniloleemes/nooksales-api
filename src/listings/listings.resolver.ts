@@ -1,4 +1,4 @@
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
+import { Resolver, Args, Mutation, Query } from '@nestjs/graphql';
 import { ListingsService } from './listings.service';
 import { CreateListingInput } from './dto/listing.input';
 import { ListingType } from './models/listing-type.model';
@@ -15,5 +15,10 @@ export class ListingsResolver {
     @UseGuards(GqlAuthGuard)
     async createListing(@Args('input') input: CreateListingInput, @CurrentUser() user: User): Promise<ListingType> {
         return await this.listingsService.create(input, user);
+    }
+
+    @Query(() => [ListingType])
+    async listings(): Promise<ListingType[]> {
+        return await this.listingsService.findAll();
     }
 }

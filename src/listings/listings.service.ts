@@ -14,4 +14,8 @@ export class ListingsService {
         const listing = new this.listingModel({ ...input, userId: user.id })
         return await listing.save();
     }
+
+    async findAll(): Promise<ListingType[]> {
+        return await this.listingModel.find().exec();
+    }
 }
