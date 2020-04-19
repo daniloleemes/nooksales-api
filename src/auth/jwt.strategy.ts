@@ -9,7 +9,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     constructor(private readonly usersService: UsersService) {
         super({
             jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-            ignoreExpiration: false,
+            ignoreExpiration: true,
             secretOrKey: 'nooksales',
         })
     }
