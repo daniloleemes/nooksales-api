@@ -16,6 +16,25 @@ export class ListingsService {
     }
 
     async findAll(): Promise<ListingType[]> {
-        return await this.listingModel.find().exec();
+        const result = await this.listingModel.aggregate([
+            {
+                $lookup: {
+                    from: 'users',
+                    localField: 'userId',
+                    foreignField: '_id',
+                    as: 'user'
+                }
+            },
+            { $unwind: '$user' },
+            {
+                $lookup: {
+                    from: 'collectibles',
+                    localField: 'itemsWanted',
+                    foreignField: '_id',
+                    as: 'itemsWanted'
+                }
+            },
+        ])
+        return result;
     }
 }

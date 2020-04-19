@@ -1,10 +1,10 @@
 import * as mongoose from 'mongoose';
 
 export const ListingSchema = new mongoose.Schema({
-    userId: String,
-    itemId: String,
+    userId: mongoose.Schema.Types.ObjectID,
+    itemId: mongoose.Schema.Types.ObjectID,
     sellOnly: Boolean,
     tradeOnly: Boolean,
-    itemsWanted: [String],
+    itemsWanted: [mongoose.Schema.Types.ObjectID],
     price: Number
 });
