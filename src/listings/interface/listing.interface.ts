@@ -7,4 +7,5 @@ export interface Listing extends Document {
     readonly tradeOnly: boolean;
     readonly itemsWanted: string[];
     readonly price: number;
+    readonly status: string;
 }

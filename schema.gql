@@ -55,13 +55,14 @@ type UserType {
 }
 
 type ListingType {
-  id: ID!
+  id: ID
   user: UserType!
   itemId: String!
   itemsWanted: [CollectibleType!]!
   price: Int!
   sellOnly: Boolean!
   tradeOnly: Boolean!
+  status: String!
 }
 
 type AuthPayload {
@@ -96,4 +97,8 @@ input RegisterInput {
   discordId: String
   nintendoFriendCode: String
   twitter: String
+}
+
+type Subscription {
+  listingsUpdated: ListingType!
 }
