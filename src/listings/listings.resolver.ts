@@ -1,4 +1,4 @@
-import { Resolver, Args, Mutation, Query, Subscription, Parent, ResolveField } from '@nestjs/graphql';
+import { Resolver, Args, Mutation, Query, Subscription } from '@nestjs/graphql';
 import { ListingsService } from './listings.service';
 import { CreateListingInput } from './dto/listing.input';
 import { ListingType } from './models/listing-type.model';

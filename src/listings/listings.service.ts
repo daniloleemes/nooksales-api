@@ -6,7 +6,6 @@ import { CreateListingInput } from './dto/listing.input';
 import { User } from 'src/users/interface/user.interface';
 import { ListingType } from './models/listing-type.model';
 import { Types } from 'mongoose';
-import { pipe } from 'rxjs';
 
 @Injectable()
 export class ListingsService {
