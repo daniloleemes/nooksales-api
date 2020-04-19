@@ -1,5 +1,4 @@
 import { ObjectType, Field, ID, Int } from "@nestjs/graphql";
-import { User } from "src/users/interface/user.interface";
 import { UserType } from "src/users/models/user-type.model";
 import { CollectibleType } from "src/collectibles/models/collectible-type.model";
 
