@@ -5,6 +5,7 @@ import { CollectiblesModule } from './collectibles/collectibles.module';
 import { ListingsModule } from './listings/listings.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { QueuesModule } from './queues/queues.module';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { AuthModule } from './auth/auth.module';
     CollectiblesModule,
     ListingsModule,
     UsersModule,
-    AuthModule
+    AuthModule,
+    QueuesModule
   ],
   controllers: [],
   providers: [],
