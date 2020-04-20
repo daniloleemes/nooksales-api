@@ -70,16 +70,32 @@ type AuthPayload {
   accessToken: String!
 }
 
+type QueueType {
+  id: ID!
+  user: UserType!
+  maxQueueSize: Int!
+  maxVisitors: Int!
+  price: Int!
+  description: String!
+  status: String!
+  selfManageable: Boolean!
+  visitors: [UserType!]!
+  line: [UserType!]!
+}
+
 type Query {
   collectibles: [CollectibleType!]!
   oneCollectible(id: String!): CollectibleType!
   listings: [ListingType!]!
+  findQueue(id: String!): QueueType!
+  findAllQueue: QueueType!
 }
 
 type Mutation {
   createListing(input: CreateListingInput!): ListingType!
   login(username: String!, password: String!): AuthPayload!
   register(input: RegisterInput!): AuthPayload!
+  createQueue(input: CreateQueueInput!): QueueType!
 }
 
 input CreateListingInput {
@@ -97,6 +113,18 @@ input RegisterInput {
   discordId: String
   nintendoFriendCode: String
   twitter: String
+}
+
+input CreateQueueInput {
+  userId: String
+  description: String!
+  status: String = "ACTIVE"
+  line: [String!] = []
+  visitors: [String!] = []
+  maxQueueSize: Int!
+  maxVisitors: Int!
+  price: Int!
+  selfManageable: Boolean!
 }
 
 type Subscription {

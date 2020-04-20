@@ -42,29 +42,12 @@ export class ListingsService {
     }
 
     aggregateListingType(listingId: string, callback: (ListingType) => void) {
-        const pipeline = [
+        const matchPipeline = [
             {
                 $match: { _id: Types.ObjectId(listingId) }
-            },
-            {
-                $lookup: {
-                    from: 'users',
-                    localField: 'userId',
-                    foreignField: '_id',
-                    as: 'user'
-                }
-            },
-            { $unwind: '$user' },
-            {
-                $lookup: {
-                    from: 'collectibles',
-                    localField: 'itemsWanted',
-                    foreignField: '_id',
-                    as: 'itemsWanted'
-                }
             }
         ]
-        this.listingModel.aggregate(pipeline, (err, result) => {
+        this.listingModel.aggregate(matchPipeline.concat(this.aggregatePipeline), (err, result) => {
             if (!err) callback(result[0]);
         })
     }
