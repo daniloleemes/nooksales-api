@@ -88,7 +88,7 @@ type Query {
   oneCollectible(id: String!): CollectibleType!
   listings: [ListingType!]!
   findQueue(id: String!): QueueType!
-  findAllQueue: QueueType!
+  findAllQueue: [QueueType!]!
 }
 
 type Mutation {

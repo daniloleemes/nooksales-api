@@ -11,33 +11,32 @@ import { Types } from 'mongoose';
 export class QueuesService {
     constructor(@InjectModel('Queue') private queueModel: Model<Queue>) { }
 
-    private readonly aggregatePipeline: any[] = [
+    private aggregatePipeline: any[] = [
         {
-            '$lookup': {
-                'from': 'users',
-                'localField': 'visitors',
-                'foreignField': '_id',
-                'as': 'visitors'
+            $lookup: {
+                from: 'users',
+                localField: 'visitors',
+                foreignField: '_id',
+                as: 'visitors'
             }
-        }, {
-            '$lookup': {
-                'from': 'users',
-                'localField': 'line',
-                'foreignField': '_id',
-                'as': 'line'
+        },
+        {
+            $lookup: {
+                from: 'users',
+                localField: 'line',
+                foreignField: '_id',
+                as: 'line'
             }
-        }, {
-            '$lookup': {
-                'from': 'users',
-                'localField': 'userId',
-                'foreignField': '_id',
-                'as': 'user'
+        },
+        {
+            $lookup: {
+                from: 'users',
+                localField: 'userId',
+                foreignField: '_id',
+                as: 'user'
             }
-        }, {
-            '$unwind': {
-                'path': '$user'
-            }
-        }
+        },
+        { $unwind: { path: '$user' } }
     ]
 
     async create(input: CreateQueueInput, user: User): Promise<QueueType> {
@@ -46,7 +45,8 @@ export class QueuesService {
     }
 
     async findAll(): Promise<QueueType[]> {
-        return await this.queueModel.aggregate(this.aggregatePipeline);
+        const result = await this.queueModel.aggregate(this.aggregatePipeline);
+        return result;
     }
 
     async findOne(id: string): Promise<QueueType> {
@@ -54,7 +54,6 @@ export class QueuesService {
             { $match: { _id: Types.ObjectId(id) } }
         ]
         const result = await this.queueModel.aggregate(matchPipeline.concat(this.aggregatePipeline));
-        console.log(result)
-        return result;
+        return result[0];
     }
 }

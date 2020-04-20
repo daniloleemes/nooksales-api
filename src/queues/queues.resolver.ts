@@ -27,7 +27,7 @@ export class QueuesResolver {
         return await this.queueService.findOne(id);
     }
 
-    @Query(() => QueueType)
+    @Query(() => [QueueType])
     async findAllQueue(): Promise<QueueType[]> {
         return await this.queueService.findAll();
     }

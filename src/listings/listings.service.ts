@@ -11,7 +11,7 @@ import { Types } from 'mongoose';
 export class ListingsService {
     constructor(@InjectModel('Listing') private listingModel: Model<Listing>) { }
 
-    private aggregatePipeline: any = [
+    private aggregatePipeline: any[] = [
         {
             $lookup: {
                 from: 'users',
