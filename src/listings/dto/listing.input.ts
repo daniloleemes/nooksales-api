@@ -2,8 +2,8 @@ import { InputType, Field, Int } from "@nestjs/graphql";
 
 @InputType()
 export class CreateListingInput {
-    @Field({ nullable: true }) readonly userId: string;
-    @Field() readonly itemId: string;
+    @Field({ nullable: true }) readonly owner: string;
+    @Field() readonly item: string;
     @Field(() => [String]) readonly itemsWanted: string[];
     @Field(() => Int) readonly price: number;
     @Field() readonly sellOnly: boolean;
@@ -12,8 +12,8 @@ export class CreateListingInput {
 
 @InputType()
 export class UpdateListingInput {
-    @Field({ nullable: true }) readonly userId: string;
-    @Field() readonly itemId: string;
+    @Field({ nullable: true }) readonly owner: string;
+    @Field() readonly item: string;
     @Field(() => [String]) readonly itemsWanted: string[];
     @Field(() => Int) readonly price: number;
     @Field() readonly sellOnly: boolean;

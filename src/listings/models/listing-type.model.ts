@@ -5,8 +5,8 @@ import { CollectibleType } from "src/collectibles/models/collectible-type.model"
 @ObjectType()
 export class ListingType {
     @Field(() => ID, { nullable: true }) readonly id: string;
-    @Field(() => UserType) readonly user: UserType;
-    @Field() readonly itemId: string;
+    @Field(() => UserType) readonly owner: UserType;
+    @Field(() => CollectibleType) readonly item: string;
     @Field(() => [CollectibleType]) readonly itemsWanted: CollectibleType[];
     @Field(() => Int) readonly price: number;
     @Field() readonly sellOnly: boolean;

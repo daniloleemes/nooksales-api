@@ -1,9 +1,9 @@
 import * as mongoose from 'mongoose';
 
 export const ListingSchema = new mongoose.Schema({
-    userId: mongoose.Schema.Types.ObjectID,
-    itemId: mongoose.Schema.Types.ObjectID,
-    itemsWanted: [mongoose.Schema.Types.ObjectID],
+    owner: { type: mongoose.Schema.Types.ObjectID, ref: 'User' },
+    item: { type: mongoose.Schema.Types.ObjectID, ref: 'Collectible' },
+    itemsWanted: [{ type: mongoose.Schema.Types.ObjectID, ref: 'Collectible' }],
     status: {
         type: String,
         enum: ['ACTIVE', 'INACTIVE'],

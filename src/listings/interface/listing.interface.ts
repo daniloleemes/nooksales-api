@@ -1,8 +1,8 @@
 import { Document } from 'mongoose';
 
 export interface Listing extends Document {
-    readonly userId: string;
-    readonly itemId: string;
+    readonly owner: string;
+    readonly item: string;
     readonly sellOnly: boolean;
     readonly tradeOnly: boolean;
     readonly itemsWanted: string[];

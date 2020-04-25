@@ -20,7 +20,7 @@ export class ListingsResolver {
     @UseGuards(GqlAuthGuard)
     async createListing(@Args('input') input: CreateListingInput, @CurrentUser() user: User): Promise<ListingType> {
         const newListing = await this.listingsService.create(input, user);
-        this.listingsService.aggregateListingType(newListing.id, (listing) => this.pubSub.publish(SubscriptionTypes.LISTINGS_UPDATED, listing));
+        this.pubSub.publish(SubscriptionTypes.LISTINGS_UPDATED, newListing);
         return newListing;
     }
 
@@ -30,10 +30,7 @@ export class ListingsResolver {
     }
 
     @Subscription(() => ListingType, {
-        resolve: value => {
-            value.id = value.id || value._id
-            return value
-        },
+        resolve: value => value,
     })
     listingsUpdated() {
         return this.pubSub.asyncIterator(SubscriptionTypes.LISTINGS_UPDATED);
