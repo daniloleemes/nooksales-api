@@ -55,6 +55,6 @@ export class QueuesService {
         return await this.queueModel.findOne({ _id: Types.ObjectId(id) })
         .populate('owner')
         .populate('visitors')
-        .populate('line').exec();;
+        .populate('line').exec();
     }
 }
