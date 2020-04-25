@@ -1,7 +1,7 @@
 import { Document } from 'mongoose';
 
 export interface Queue extends Document {
-    readonly userId: string;
+    readonly owner: string;
     readonly description: string;
     readonly status: string;
     readonly line: string[];

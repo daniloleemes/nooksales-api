@@ -72,7 +72,7 @@ type AuthPayload {
 
 type QueueType {
   id: ID!
-  user: UserType!
+  owner: UserType!
   maxQueueSize: Int!
   maxVisitors: Int!
   price: Int!

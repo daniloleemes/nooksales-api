@@ -45,15 +45,16 @@ export class QueuesService {
     }
 
     async findAll(): Promise<QueueType[]> {
-        const result = await this.queueModel.aggregate(this.aggregatePipeline);
-        return result;
+        return await this.queueModel.find()
+            .populate('owner')
+            .populate('visitors')
+            .populate('line').exec();
     }
 
     async findOne(id: string): Promise<QueueType> {
-        const matchPipeline = [
-            { $match: { _id: Types.ObjectId(id) } }
-        ]
-        const result = await this.queueModel.aggregate(matchPipeline.concat(this.aggregatePipeline));
-        return result[0];
+        return await this.queueModel.findOne({ _id: Types.ObjectId(id) })
+        .populate('owner')
+        .populate('visitors')
+        .populate('line').exec();;
     }
 }

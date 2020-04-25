@@ -4,7 +4,7 @@ import { UserType } from "src/users/models/user-type.model";
 @ObjectType()
 export class QueueType {
     @Field(() => ID) readonly id: string;
-    @Field(() => UserType) readonly user: UserType;
+    @Field(() => UserType) readonly owner: UserType;
     @Field(() => Int) readonly maxQueueSize: number;
     @Field(() => Int) readonly maxVisitors: number;
     @Field(() => Int) readonly price: number;

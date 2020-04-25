@@ -1,9 +1,9 @@
 import * as mongoose from 'mongoose';
 
 export const QueueSchema = new mongoose.Schema({
-    userId: mongoose.Schema.Types.ObjectID,
-    visitors: [mongoose.Schema.Types.ObjectID],
-    line: [mongoose.Schema.Types.ObjectID],
+    owner: { type: mongoose.Schema.Types.ObjectID, ref: 'User' },
+    visitors: [{ type: mongoose.Schema.Types.ObjectID, ref: 'User' }],
+    line: [{ type: mongoose.Schema.Types.ObjectID, ref: 'User' }],
     selfManageable: Boolean,
     maxQueueSize: Number,
     maxVisitors: Number,
