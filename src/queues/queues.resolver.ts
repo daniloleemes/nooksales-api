@@ -2,11 +2,11 @@ import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
 import { QueuesService } from './queues.service';
 import { Inject, UseGuards } from '@nestjs/common';
 import { PubSub } from 'graphql-subscriptions';
-import { QueueType } from './models/queue-type.model';
 import { CreateQueueInput } from './dto/queue.input';
 import { CurrentUser } from 'src/users/user.decorator';
-import { User } from 'src/users/interface/user.interface';
 import { GqlAuthGuard } from 'src/auth/gql-auth.guard';
+import { User } from 'src/users/model/user.entity';
+import { Queue } from './model/queue.entity';
 
 @Resolver('Queues')
 export class QueuesResolver {
@@ -16,19 +16,19 @@ export class QueuesResolver {
     ) {}
 
     @UseGuards(GqlAuthGuard)
-    @Mutation(() => QueueType)
-    async createQueue(@Args('input') input: CreateQueueInput, @CurrentUser() user: User): Promise<QueueType>{
+    @Mutation(() => Queue)
+    async createQueue(@Args('input') input: CreateQueueInput, @CurrentUser() user: User): Promise<Queue>{
         const newQueue = await this.queueService.create(input, user);
         return newQueue;
     }
 
-    @Query(() => QueueType)
-    async findQueue(@Args('id') id: string): Promise<QueueType> {
+    @Query(() => Queue)
+    async findQueue(@Args('id') id: string): Promise<Queue> {
         return await this.queueService.findOne(id);
     }
 
-    @Query(() => [QueueType])
-    async findAllQueue(): Promise<QueueType[]> {
+    @Query(() => [Queue])
+    async findAllQueue(): Promise<Queue[]> {
         return await this.queueService.findAll();
     }
 

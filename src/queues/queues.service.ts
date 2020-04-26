@@ -1,11 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Queue } from './interface/queue.interface';
 import { CreateQueueInput } from './dto/queue.input';
-import { User } from 'src/users/interface/user.interface';
-import { QueueType } from './models/queue-type.model';
-import { Types } from 'mongoose';
 
 @Injectable()
 export class QueuesService {

@@ -1,12 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, OneToMany } from "typeorm";
 import { ObjectType, Field, ID } from "@nestjs/graphql";
 import * as bcrypt from 'bcryptjs';
+import { hashids } from "src/shared/utils";
+import { Queue } from "src/queues/model/queue.entity";
 
 @ObjectType()
 @Entity()
 export class User {
 
-    @Field(() => ID)
+    private _hashId: string;
+
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -25,8 +28,19 @@ export class User {
     @Column()
     password: string;
 
+    @OneToMany(type => Queue, queue => queue.owner)
+    queues: Queue[];
+
     @BeforeInsert()
     async hashPassword() {
         this.password = await bcrypt.hash(this.password, 12);
+    }
+
+    @Field(() => ID, { name: 'id' })
+    get hashId(): string {
+        if (!this._hashId) {
+            this._hashId = hashids.encode(this.id);
+        }
+        return this._hashId;
     }
 }
