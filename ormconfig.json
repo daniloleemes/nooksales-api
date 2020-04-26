@@ -1,0 +1,13 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "nooksales",
+    "password": "nooksales",
+    "database": "nooksales",
+    "entities": [
+        "dist/**/*.entity{.ts,.js}"
+    ],
+    "autoLoadEntities": true,
+    "synchronize": true
+}

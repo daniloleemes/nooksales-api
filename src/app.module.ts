@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { MongooseModule } from '@nestjs/mongoose';
 import { CollectiblesModule } from './collectibles/collectibles.module';
 import { ListingsModule } from './listings/listings.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { QueuesModule } from './queues/queues.module';
-
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { LoggerModule } from './logger/logger.module';
 @Module({
   imports: [
     GraphQLModule.forRoot({
@@ -14,12 +14,13 @@ import { QueuesModule } from './queues/queues.module';
       installSubscriptionHandlers: true,
       context: ({ req, res }) => ({ req, res })
     }),
-    MongooseModule.forRoot('mongodb://localhost:27017/nooksales', { useNewUrlParser: true, useUnifiedTopology: true }),
+    TypeOrmModule.forRoot(),
     CollectiblesModule,
     ListingsModule,
     UsersModule,
     AuthModule,
-    QueuesModule
+    QueuesModule,
+    LoggerModule
   ],
   controllers: [],
   providers: [],
