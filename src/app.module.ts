@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { CollectiblesModule } from './collectibles/collectibles.module';
-import { ListingsModule } from './listings/listings.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { QueuesModule } from './queues/queues.module';
@@ -15,8 +13,6 @@ import { LoggerModule } from './logger/logger.module';
       context: ({ req, res }) => ({ req, res })
     }),
     TypeOrmModule.forRoot(),
-    CollectiblesModule,
-    ListingsModule,
     UsersModule,
     AuthModule,
     QueuesModule,
