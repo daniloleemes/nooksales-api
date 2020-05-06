@@ -2,109 +2,32 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type CollectibleMaterialType {
-  count: Int!
-  itemName: String!
-}
-
-type CollectibleActiveTimesType {
-  startTime: Int!
-  endTime: Int!
-}
-
-type CollectibleType {
+type Queue {
   id: ID!
-  gameId: String
-  name: String!
-  image: String
-  obtainedFrom: String!
-  category: String!
-  catchPhrase: String!
-  museumPhrase: String!
-  house: String!
-  model: String!
-  rarity: String!
-  shadow: String!
-  size: String!
-  unlocksAfter: String!
-  weather: String!
-  uses: String!
-  buy: Int!
-  nookMiles: Int!
-  number: Int!
-  sell: Int!
-  variant: Boolean!
-  customize: Boolean!
-  dIY: Boolean!
-  reorder: Boolean!
-  vFX: Boolean!
-  variants: [String!]!
-  activeMonthsNorth: [Int!]!
-  activeMonthsSouth: [Int!]!
-  activeTimes: [CollectibleActiveTimesType!]!
-  materials: [CollectibleMaterialType!]!
 }
 
-type UserType {
-  id: ID!
-  username: String
+type User {
+  username: String!
   discordId: String
   nintendoFriendCode: String
   twitter: String
-  password: String
-}
-
-type ListingType {
-  id: ID
-  owner: UserType!
-  item: CollectibleType!
-  itemsWanted: [CollectibleType!]!
-  price: Int!
-  sellOnly: Boolean!
-  tradeOnly: Boolean!
-  status: String!
+  id: ID!
 }
 
 type AuthPayload {
-  user: UserType!
+  user: User!
   accessToken: String!
 }
 
-type QueueType {
-  id: ID!
-  owner: UserType!
-  maxQueueSize: Int!
-  maxVisitors: Int!
-  price: Int!
-  description: String!
-  status: String!
-  selfManageable: Boolean!
-  visitors: [UserType!]!
-  line: [UserType!]!
-}
-
 type Query {
-  collectibles: [CollectibleType!]!
-  oneCollectible(id: String!): CollectibleType!
-  listings: [ListingType!]!
-  findQueue(id: String!): QueueType!
-  findAllQueue: [QueueType!]!
+  findQueue(id: String!): Queue!
+  findAllQueue: [Queue!]!
 }
 
 type Mutation {
-  createListing(input: CreateListingInput!): ListingType!
   login(username: String!, password: String!): AuthPayload!
   register(input: RegisterInput!): AuthPayload!
-  createQueue(input: CreateQueueInput!): QueueType!
-}
-
-input CreateListingInput {
-  owner: String
-  item: String!
-  itemsWanted: [String!]!
-  price: Int!
-  sellOnly: Boolean!
-  tradeOnly: Boolean!
+  createQueue(input: CreateQueueInput!): Queue!
 }
 
 input RegisterInput {
@@ -116,17 +39,10 @@ input RegisterInput {
 }
 
 input CreateQueueInput {
-  userId: String
   description: String!
-  status: String = "ACTIVE"
-  line: [String!] = []
-  visitors: [String!] = []
+  status: Float = 0
   maxQueueSize: Int!
   maxVisitors: Int!
   price: Int!
   selfManageable: Boolean!
-}
-
-type Subscription {
-  listingsUpdated: ListingType!
 }

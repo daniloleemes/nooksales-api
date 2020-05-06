@@ -13,16 +13,20 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @Field()
     @Column()
     username: string;
 
-    @Column()
+    @Field({ nullable: true })
+    @Column({ nullable: true })
     discordId: string;
 
-    @Column()
+    @Field({ nullable: true })
+    @Column({ nullable: true })
     nintendoFriendCode: string;
 
-    @Column()
+    @Field({ nullable: true })
+    @Column({ nullable: true })
     twitter: string;
 
     @Column()
