@@ -1,54 +1,31 @@
 import { Injectable } from '@nestjs/common';
 import { CreateQueueInput } from './dto/queue.input';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Queue } from './model/queue.entity';
+import { Repository } from 'typeorm';
+import { User } from 'src/users/model/user.entity';
 
 @Injectable()
 export class QueuesService {
-    constructor(@InjectModel('Queue') private queueModel: Model<Queue>) { }
+    constructor(
+        @InjectRepository(Queue) private queueRepository: Repository<Queue>
+    ) { }
 
-    private aggregatePipeline: any[] = [
-        {
-            $lookup: {
-                from: 'users',
-                localField: 'visitors',
-                foreignField: '_id',
-                as: 'visitors'
-            }
-        },
-        {
-            $lookup: {
-                from: 'users',
-                localField: 'line',
-                foreignField: '_id',
-                as: 'line'
-            }
-        },
-        {
-            $lookup: {
-                from: 'users',
-                localField: 'userId',
-                foreignField: '_id',
-                as: 'user'
-            }
-        },
-        { $unwind: { path: '$user' } }
-    ]
+    async create(input: CreateQueueInput, user: User): Promise<Queue> {
+        const { ...attributes } = input;
+        const queue = this.queueRepository.create({
+            ...attributes,
+            owner: user
+        });
 
-    async create(input: CreateQueueInput, user: User): Promise<QueueType> {
-        const queue = new this.queueModel({ ...input, userId: user.id });
-        return await queue.save();
+        return this.queueRepository.save(queue);
     }
 
-    async findAll(): Promise<QueueType[]> {
-        return await this.queueModel.find()
-            .populate('owner')
-            .populate('visitors')
-            .populate('line').exec();
+    async findAll(): Promise<Queue[]> {
+        return this.queueRepository.find();
     }
 
-    async findOne(id: string): Promise<QueueType> {
-        return await this.queueModel.findOne({ _id: Types.ObjectId(id) })
-        .populate('owner')
-        .populate('visitors')
-        .populate('line').exec();
+    async findById(id: string): Promise<Queue> {
+        return this.queueRepository.findOne(id);
     }
 }

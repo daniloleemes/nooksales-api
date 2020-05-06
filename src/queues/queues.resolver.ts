@@ -24,7 +24,7 @@ export class QueuesResolver {
 
     @Query(() => Queue)
     async findQueue(@Args('id') id: string): Promise<Queue> {
-        return await this.queueService.findOne(id);
+        return await this.queueService.findById(id);
     }
 
     @Query(() => [Queue])

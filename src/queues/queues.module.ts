@@ -1,15 +1,13 @@
 import { Module } from '@nestjs/common';
 import { QueuesService } from './queues.service';
 import { QueuesResolver } from './queues.resolver';
-import { MongooseModule } from '@nestjs/mongoose';
-import { QueueSchema } from './queue.schema';
 import { SubscriptionModule } from 'src/subscription/subscription.module';
+import { Queue } from './model/queue.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([
-      { name: 'Queue', schema: QueueSchema }
-    ]),
+    TypeOrmModule.forFeature([Queue]),
     SubscriptionModule
   ],
   providers: [QueuesService, QueuesResolver]
