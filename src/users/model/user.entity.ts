@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, OneToMany, ManyToMany, RelationId, ManyToOne, JoinColumn } from "typeorm";
 import { ObjectType, Field, ID } from "@nestjs/graphql";
 import * as bcrypt from 'bcryptjs';
 import { hashids } from "src/shared/utils";
@@ -30,6 +30,16 @@ export class User {
 
     @OneToMany(type => Queue, queue => queue.owner)
     queues: Queue[];
+
+    @JoinColumn({ name: 'visiting_queue_id' })
+    @ManyToOne(type => Queue, queue => queue.visitors)
+    visitingQueue: Queue;
+
+    @ManyToMany(type => Queue, queue => queue.awaitingUsers)
+    awaitingFor: Queue[];
+
+    @RelationId((user: User) => user.visitingQueue)
+    visitingQueueId: number;
 
     @BeforeInsert()
     async hashPassword() {
