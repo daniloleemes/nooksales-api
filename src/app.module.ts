@@ -4,7 +4,6 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { QueuesModule } from './queues/queues.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { LoggerModule } from './logger/logger.module';
 @Module({
   imports: [
     GraphQLModule.forRoot({
@@ -15,8 +14,7 @@ import { LoggerModule } from './logger/logger.module';
     TypeOrmModule.forRoot(),
     UsersModule,
     AuthModule,
-    QueuesModule,
-    LoggerModule
+    QueuesModule
   ],
   controllers: [],
   providers: [],
